@@ -1,22 +1,24 @@
 const express = require('express')
 const router = express.Router()
 const Auth = require('../models/auth')
+const ethers = require('ethers')
 
 router.post('/register', async (req,res) => {
+    const newWallet = ethers.Wallet.createRandom()
     const newAuth = new Auth({
         _id: req.body.email, 
-        wallet: req.body.wallet, 
-        mnemonic: req.body.mnemonic, 
-        privatekey: req.body.privatekey
+        wallet: newWallet.address, 
+        mnemonic: newWallet.mnemonic.phrase, 
+        privatekey: newWallet.privateKey
     }) 
-    
     try{
         const newUser = await newAuth.save()
-        res.sendStatus(201).json({message: "user registered"})
+        //res.sendStatus(201).json({message: "user registered"})
+        res.se
+        res.sendStatus(201)
     } catch (err){
         res.sendStatus(500).json({message: "user exist"})
     }
-
 })
 
 router.get("/users", async (req, res) => {
