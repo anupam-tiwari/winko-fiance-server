@@ -4,15 +4,17 @@ const cors = require("cors");
 const mongoose = require('mongoose');
 
 const authRouter = require('./routes/auth');
+const accountRouter = require('./routes/account')
 require("dotenv").config();
 
-const DBURL  = 'mongodb+srv://WInkoUser1:Winko1@winkocluster1.li2kx.mongodb.net/WinkoFinance?retryWrites=true&w=majority'
-//const DBURL = process.env.DBURL;
+
+const DBURL = process.env.DBURL;
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/auth', authRouter)
+app.use('/account',accountRouter)
 
 const connectionParams = {
   useNewUrlParser: true,
