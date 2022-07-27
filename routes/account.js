@@ -40,7 +40,15 @@ router.get('/balance/:id', async(req, res) => {
 //make trx
 
 router.post('/tx', async(req,res) => {
-    let wallet = new ethers.Wallet(req.body.sender)
+
+    let senderAccount = await Auth.findById(req.body.sender); 
+    let recieverAccount = await Auth.findById(req.body.reciever); 
+    let amount = req.body.amount; 
+
+    console.log(senderAccount); 
+    console.log(recieverAccount); 
+    console.log(amount); 
+    let wallet = new ethers.Wallet(senderAccount.privatekey)
     let walletSigner = wallet.connect(RPCprovider);
     let tempContract = new ethers.Contract(
          contractAddress,
@@ -49,11 +57,10 @@ router.post('/tx', async(req,res) => {
     );
     try{
         const tx = await tempContract
-        .transfer(req.body.reciever, req.body.amount)
+        .transfer(recieverAccount.wallet, amount)
         .then((transferResult) => {
-          console.log(transferResult);
-        });
-        res.send(JSON.stringify("tx confrimed"))
+          res.send(JSON.stringify(transferResult))
+        }); 
     }catch(err){
         console.log(err)
     }
