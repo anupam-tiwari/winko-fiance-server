@@ -13,9 +13,7 @@ router.post('/register', async (req,res) => {
     }) 
     try{
         const newUser = await newAuth.save()
-        //res.sendStatus(201).json({message: "user registered"})
-        res.se
-        res.sendStatus(201)
+        res.send(JSON.stringify("user registered"))
     } catch (err){
         res.sendStatus(500).json({message: "user exist"})
     }
