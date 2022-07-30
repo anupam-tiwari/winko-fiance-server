@@ -7,8 +7,8 @@ const authRouter = require('./routes/auth');
 const accountRouter = require('./routes/account')
 require("dotenv").config();
 
-const DBURL  = 'mongodb+srv://WInkoUser1:Winko1@winkocluster1.li2kx.mongodb.net/WinkoFinance?retryWrites=true&w=majority'
-//const DBURL = process.env.DBURL;
+
+const DBURL = process.env.DBURL;
 const app = express();
 
 app.use(bodyParser.json());
