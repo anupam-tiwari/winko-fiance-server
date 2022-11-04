@@ -9,7 +9,6 @@ const { json } = require('body-parser');
 const Auth = require('../models/auth')
 
 
-
 //get balance 
 router.get('/balance/:id', async(req, res) => {
     console.log(req.params.id)
