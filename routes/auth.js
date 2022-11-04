@@ -11,10 +11,12 @@ router.post('/register', async (req,res) => {
         // mnemonic: newWallet.mnemonic.phrase, 
         // privatekey: newWallet.privateKey
 
-        wallet: req.body.address, 
-        mnemonic: req.body.mnemonic.phrase, 
-        privatekey: req.body.privateKey
+        wallet: req.body.wallet, 
+        mnemonic: req.body.mnemonic, 
+        privatekey: req.body.privatekey
     }) 
+
+    console.log(newAuth); 
     try{
         const newUser = await newAuth.save()
         res.send(JSON.stringify("user registered"))
