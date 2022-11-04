@@ -4,12 +4,16 @@ const Auth = require('../models/auth')
 const ethers = require('ethers')
 
 router.post('/register', async (req,res) => {
-    const newWallet = ethers.Wallet.createRandom()
+    //const newWallet = ethers.Wallet.createRandom()
     const newAuth = new Auth({
         _id: req.body.email, 
-        wallet: newWallet.address, 
-        mnemonic: newWallet.mnemonic.phrase, 
-        privatekey: newWallet.privateKey
+        // wallet: newWallet.address, 
+        // mnemonic: newWallet.mnemonic.phrase, 
+        // privatekey: newWallet.privateKey
+
+        wallet: req.body.address, 
+        mnemonic: req.body.mnemonic.phrase, 
+        privatekey: req.body.privateKey
     }) 
     try{
         const newUser = await newAuth.save()
